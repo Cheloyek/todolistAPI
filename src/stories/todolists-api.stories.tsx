@@ -77,8 +77,10 @@ export const GetTasks = () => {
 }
 export const CreateTask = () => {
     const [state, setState] = useState(null)
+    const todoId = '77fad263-ec6c-4bcf-b4c5-b9c41553407b'
+    const title = 'taks 3'
     useEffect( () => {
-        todolistAPI.createTask('77fad263-ec6c-4bcf-b4c5-b9c41553407b', 'taks 3')
+        todolistAPI.createTask(todoId, title)
             .then((res) => {
                 setState(res.data)
             })
@@ -92,10 +94,13 @@ export const UpdateThisTask = () => {
     }, [])
     return <div>{JSON.stringify(state)}</div>
 }
-// export const updateTasks = () => {
-//     const [state, setState] = useState<any>(null)
-//     useEffect( () => {
-//
-//     })
-// }
 
+export const DeleteThisTask = () => {
+    const [state, setState] = useState(null)
+    const todoId = '77fad263-ec6c-4bcf-b4c5-b9c41553407b'
+    const taskId = 'd7c2bbd1-8ce4-4417-91c2-5cd1efc87fb4'
+    useEffect( () => {
+        todolistAPI.deleteTask(todoId, taskId)
+    })
+    return <div>task {taskId} have been delete from todolist {taskId}</div>
+}
