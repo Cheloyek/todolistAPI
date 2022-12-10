@@ -67,30 +67,55 @@ export const UpdateTodolistTitle = () => {
 }
 export const GetTasks = () => {
     const [state, setState] = useState(null)
-    useEffect( () => {
-        todolistAPI.getTasksFromTodolist('c9da495b-f7e8-48d6-b42d-743b4013c98a')
+    const [todoId, setTodoId] = useState<string>('')
+    // const todoId = '77fad263-ec6c-4bcf-b4c5-b9c41553407b'
+    const getAllTasks = () => {
+        todolistAPI.getTasksFromTodolist(todoId)
             .then( (res) => {
                 setState(res.data)
             })
-    }, [])
-    return <div>{JSON.stringify(state)}</div>
+    }
+
+    return <div>{JSON.stringify(state)}
+        <input placeholder={'todoId'} value={todoId} onChange={(e) => {setTodoId(e.currentTarget.value)}}/>
+        <button onClick={getAllTasks}>get tasks</button>
+    </div>
 }
 export const CreateTask = () => {
     const [state, setState] = useState(null)
-    const todoId = '77fad263-ec6c-4bcf-b4c5-b9c41553407b'
-    const title = 'taks 3'
-    useEffect( () => {
+    const [todoId, setTodoId] = useState<string>('')
+    const [title, setTitle] = useState<string>('')
+    // const todoId = '77fad263-ec6c-4bcf-b4c5-b9c41553407b'
+    // const title = 'taks 3'
+    const createNewTask = () => {
         todolistAPI.createTask(todoId, title)
             .then((res) => {
-                setState(res.data)
+                setState(res.data.data)
             })
-    }, [])
-    return <div>{JSON.stringify(state)}</div>
+    }
+
+
+    return <div>{JSON.stringify(state)}
+    <div>
+        <input placeholder={'todolistId'} value={todoId}
+        onChange={(e) => {setTodoId(e.currentTarget.value)}}/>
+        <input placeholder={'Task title'} value={title}
+        onChange={(e) => {setTitle(e.currentTarget.value)}}/>
+        <button onClick={createNewTask}>create task</button>
+    </div></div>
 }
+
 export const UpdateThisTask = () => {
     const [state, setState] = useState(null)
+    const todoId = 'c9da495b-f7e8-48d6-b42d-743b4013c98a'
+    const taskId = '1d2d082b-8bd4-4b5e-92a2-7867f4b8f7f3'
+    const title = 'Changed title'
+    const description = 'This title have been changed'
+    const priority = 7
+    const startDate = '5.12.2022'
+    const deadline = '6.12.2099'
     useEffect( () => {
-        todolistAPI.updateTask('c9da495b-f7e8-48d6-b42d-743b4013c98a', '1d2d082b-8bd4-4b5e-92a2-7867f4b8f7f3', 'Changed title', 'This title have been changed', 7, '5.12.2022', '6.12.2099')
+        todolistAPI.updateTask( todoId, taskId, title, description, priority, startDate, deadline)
     }, [])
     return <div>{JSON.stringify(state)}</div>
 }

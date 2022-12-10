@@ -34,6 +34,19 @@ type ResponseType<T = {}> = {
     data: T
 }
 
+type TaskType = {
+    description: string
+    title: string
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
+
 const settings = {
     withCredentials: true,
     headers: {
@@ -69,15 +82,15 @@ export const todolistAPI = {
         return instance.delete<ResponseType>(`todo-lists/${todoId}`)
     },
     getTasksFromTodolist(todoId: string) {
-        return instance.get(`todo-lists/${todoId}/tasks`)
+        return instance.get<any>(`todo-lists/${todoId}/tasks`)
     },
     createTask(todoId: string, title: string) {
-        return instance.post(`todo-lists/${todoId}/tasks`, {title: title})
+        return instance.post<any>(`todo-lists/${todoId}/tasks`, {title: title})
     },
     updateTask(todoId: string,taskId: string,  title: string, description: string, priority: number, startDate: string, deadline: string) {
-        return instance.put(`todo-lists/${todoId}/tasks/${taskId}`, {title: title, description: description, completed: false, status: 0, priority: priority, startDate: startDate, deadline: deadline, addedDate: Date})
+        return instance.put<any>(`todo-lists/${todoId}/tasks/${taskId}`, {title: title, description: description, completed: false, status: 0, priority: priority, startDate: startDate, deadline: deadline, addedDate: Date})
     },
     deleteTask(todoId: string, taskId: string) {
-        return instance.delete(`todo-lists/${todoId}/tasks/${taskId}`)
+        return instance.delete<any>(`todo-lists/${todoId}/tasks/${taskId}`)
     }
 }
