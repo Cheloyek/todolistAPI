@@ -1,10 +1,12 @@
 import axios from "axios";
+import {FilterValuesType} from "../App";
 
-type TodolistType = {
-        "id": string,
-        "title": string,
-        "addedDate": Date,
-        "order": number
+export type TodolistType = {
+        id: string,
+        title: string,
+        addedDate: string,
+        order: number
+        filter: FilterValuesType
     }
 
 type CreateTodolistType = {
@@ -73,7 +75,7 @@ export const todolistAPI = {
         // return axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title: title}, settings)
         return instance.post<ResponseType<{item: TodolistType}>>('todo-lists', {title: title})
     },
-    getTodolist() {
+    getTodolists() {
         // return axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', settings)
         return instance.get<Array<TodolistType>>('todo-lists')
     },
