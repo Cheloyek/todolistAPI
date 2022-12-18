@@ -49,6 +49,12 @@ type TaskType = {
     addedDate: string
 }
 
+type GetTasksResponse = {
+    error: string | null
+    totalCount: number
+    items: TaskType[]
+}
+
 const settings = {
     withCredentials: true,
     headers: {
@@ -84,7 +90,7 @@ export const todolistAPI = {
         return instance.delete<ResponseType>(`todo-lists/${todoId}`)
     },
     getTasksFromTodolist(todoId: string) {
-        return instance.get<any>(`todo-lists/${todoId}/tasks`)
+        return instance.get<GetTasksResponse>(`todo-lists/${todoId}/tasks`)
     },
     createTask(todoId: string, title: string) {
         return instance.post<any>(`todo-lists/${todoId}/tasks`, {title: title})
