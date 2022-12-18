@@ -114,9 +114,9 @@ export const UpdateThisTask = () => {
     const priority = 7
     const startDate = '5.12.2022'
     const deadline = '6.12.2099'
-    useEffect( () => {
-        todolistAPI.updateTask( todoId, taskId, title, description, priority, startDate, deadline)
-    }, [])
+    // useEffect( () => {
+    //     todolistAPI.updateTask( todoId, taskId, title, description, priority, startDate, deadline)
+    // }, [])
     return <div>{JSON.stringify(state)}</div>
 }
 
